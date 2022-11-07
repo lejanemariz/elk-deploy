@@ -1,0 +1,20 @@
+- name: Elasticsearch containerd
+  docker_compose:
+    project_name: elasticsearch 
+    definition: 
+      version: "3.7"
+      services:
+        app: 
+          build:
+            context: /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/elasticseach/
+          volumes:
+            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+          ports:
+            - "9200:9200"
+            - "9300:9300"
+          environment:
+            ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+          networks:
+            elk:
+              driver: bridge
+

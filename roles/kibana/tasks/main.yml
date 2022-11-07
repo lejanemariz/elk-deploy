@@ -1,0 +1,19 @@
+    
+- name: Elasticsearch containerd
+  docker_compose:
+    project_name: elasticsearch 
+    definition: 
+      version: "3.7"
+      services:
+        app: 
+          build:
+            context: /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/kibana/
+          volumes:
+            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/kibana/config/:/usr/share/kibana/config:ro
+          ports:
+            - "5601:5601"
+          networks:
+            elk:
+              driver: bridge
+          depends_on:
+            - elasticsearch

@@ -1,0 +1,25 @@
+---
+- name: setup prerequisites and docker and elasticsearch
+  hosts: elk_stack
+  gather_facts: no
+  become: true
+  become_user: root
+  roles:
+    - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/docker-install
+    - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/elasticsearch
+
+- name: Kibana Container 
+  hosts: kibana 
+  gather_facts: no 
+  become: true
+  become_user: root
+  roles:
+    - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/kibana 
+
+- name: logstash Container 
+  hosts: logstash
+  gather_facts: no 
+  become: true
+  become_user: root
+  roles:
+    - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash 

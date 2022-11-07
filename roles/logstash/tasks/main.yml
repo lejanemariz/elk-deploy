@@ -1,0 +1,21 @@
+- name: Elasticsearch containerd
+  docker_compose:
+    project_name: elasticsearch 
+    definition: 
+      version: "3.7"
+      services:
+        app: 
+          build:
+            context: /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash/
+          volumes:
+            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash/pipeline:/usr/share/logstash/pipeline:ro
+          ports:
+            - "5000:5000"
+          environment:
+            LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+          networks:
+            elk:
+              driver: bridge
+          depends_on:
+            - elasticsearch
