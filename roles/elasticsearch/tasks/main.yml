@@ -6,15 +6,14 @@
       services:
         app: 
           build:
-            context: ~/elk-deploy/roles/elasticseach/
+            context: elasticseach/
           volumes:
-            - ~/elk-deploy/roles/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+            - elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
           ports:
             - "9200:9200"
             - "9300:9300"
           environment:
             ES_JAVA_OPTS: "-Xmx256m -Xms256m"
-          networks:
-            elk:
-              driver: bridge
+          networks: 
+            - elk
 

@@ -1,6 +1,6 @@
 #Install Prerequisites
 - name: Update and Upgrade
-  shell: sudo apt-get update -y && sudo apt-get upgrade -y
+  shell: sudo apt-get autoremove -y && sudo apt-get update -y && sudo apt-get upgrade -y
 
 - name: Install required system packages
   apt:
@@ -33,17 +33,20 @@
 
 - name: Install Docker Module for Python
   pip:
-    name: docker
+    name: 
+      - docker
+      - docker-compose
 
 - name: Install Docker
   apt:
     name:
       - docker
-      - docker-ce 
-      - docker-ce-cli
       - docker.io
-      - containerd.io
-      - docker-compose
       - docker-registry
+      - docker-compose-plugin
     state: latest
     update_cache: true
+  
+- name: Create a network
+  docker_network:
+    name: elk

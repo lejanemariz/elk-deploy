@@ -1,18 +1,17 @@
 - name: kibana container
-  dcker_compose:
+  docker_compose:
     project_name: kibana 
     definition: 
       version: "3.7"
       services:
         app: 
           build:
-            context: ~/elk-deploy/roles/kibana/
+            context: kibana/
           volumes:
-            - ~/elk-deploy/roles/kibana/config/:/usr/share/kibana/config:ro
+            - kibana/config/:/usr/share/kibana/config:ro
           ports:
             - "5601:5601"
-          networks:
-            elk:
-              driver: bridge
+          networks: 
+            - elk
           depends_on:
             - elasticsearch

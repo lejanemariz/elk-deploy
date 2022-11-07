@@ -5,8 +5,8 @@
   become: true
   become_user: root
   roles:
-    - ~/elk-deploy/roles/docker-install
-    - ~/elk-deploy/roles/elasticsearch
+    - docker-install
+    - elasticsearch
 
 - name: Kibana Container 
   hosts: kibana 
@@ -14,7 +14,7 @@
   become: true
   become_user: root
   roles:
-    - ~/elk-deploy/roles/kibana 
+    - kibana 
 
 - name: logstash Container 
   hosts: logstash
@@ -22,4 +22,4 @@
   become: true
   become_user: root
   roles:
-    - ~/elk-deploy/roles/logstash 
+    - logstash 
