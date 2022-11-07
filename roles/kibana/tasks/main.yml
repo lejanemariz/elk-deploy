@@ -1,15 +1,14 @@
-    
-- name: Elasticsearch containerd
-  docker_compose:
-    project_name: elasticsearch 
+- name: kibana container
+  dcker_compose:
+    project_name: kibana 
     definition: 
       version: "3.7"
       services:
         app: 
           build:
-            context: /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/kibana/
+            context: ~/elk-deploy/roles/kibana/
           volumes:
-            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/kibana/config/:/usr/share/kibana/config:ro
+            - ~/elk-deploy/roles/kibana/config/:/usr/share/kibana/config:ro
           ports:
             - "5601:5601"
           networks:

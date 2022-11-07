@@ -6,9 +6,9 @@
       services:
         app: 
           build:
-            context: /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/elasticseach/
+            context: ~/elk-deploy/roles/elasticseach/
           volumes:
-            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+            - ~/elk-deploy/roles/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
           ports:
             - "9200:9200"
             - "9300:9300"

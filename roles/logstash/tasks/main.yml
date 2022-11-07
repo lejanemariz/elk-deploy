@@ -1,15 +1,15 @@
-- name: Elasticsearch containerd
+- name: logstash containerd
   docker_compose:
-    project_name: elasticsearch 
+    project_name: logstash 
     definition: 
       version: "3.7"
       services:
         app: 
           build:
-            context: /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash/
+            context: ~/elk-deploy/roles/logstash/
           volumes:
-            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-            - /var/lib/jenkins/workspace/ELK-deploy/playbooks/roles/logstash/pipeline:/usr/share/logstash/pipeline:ro
+            - ~/elk-deploy/roles/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+            - ~/elk-deploy/roles/logstash/pipeline:/usr/share/logstash/pipeline:ro
           ports:
             - "5000:5000"
           environment:
