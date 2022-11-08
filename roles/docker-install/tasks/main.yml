@@ -47,6 +47,5 @@
     state: latest
     update_cache: true
   
-- name: Create a network
-  docker_network:
-    name: elk
+
+

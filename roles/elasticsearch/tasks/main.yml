@@ -1,3 +1,12 @@
+- name: Copy dockerfiles
+  copy:
+    src: ~/Docker/docker-elk-playbook/roles/elasticsearch/
+    dest: ~/elasticsearch/
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
 - name: Elasticsearch containerd
   docker_compose:
     project_name: elasticsearch 
@@ -6,14 +15,16 @@
       services:
         app: 
           build:
-            context: elasticseach/
+            context: .
+            dockerfile: ~/Docker/docker-elk-playbook/roles//elasticsearch/Dockerfile
           volumes:
-            - elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+            - ~/Docker/docker-elk-playbook/roles/elasticsearch/config/elasticsearch.yml:etc/elasticsearch.yml:ro
           ports:
             - "9200:9200"
             - "9300:9300"
           environment:
             ES_JAVA_OPTS: "-Xmx256m -Xms256m"
           networks: 
-            - elk
+            default: null
+          
 

@@ -1,3 +1,13 @@
+- name: Copy a new "ntp.conf" file into place, backing up the original if it differs from the copied version
+  copy:
+    src: ~/Docker/docker-elk-playbook/roles/kibana/
+    dest: ~/kibana/
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+    
+
 - name: kibana container
   docker_compose:
     project_name: kibana 
@@ -6,7 +16,8 @@
       services:
         app: 
           build:
-            context: kibana/
+            context: .
+            dockerfile: ~/kibana/Dockerfile
           volumes:
             - kibana/config/:/usr/share/kibana/config:ro
           ports:
@@ -15,3 +26,4 @@
             - elk
           depends_on:
             - elasticsearch
+  

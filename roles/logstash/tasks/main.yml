@@ -1,3 +1,12 @@
+- name: Copy a new "ntp.conf" file into place, backing up the original if it differs from the copied version
+  copy:
+    src: ~/Docker/docker-elk-playbook/roles/logstash/
+    dest: ~/logstash/
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
 - name: logstash containerd
   docker_compose:
     project_name: logstash 
@@ -6,7 +15,8 @@
       services:
         app: 
           build:
-            context: logstash/
+            context: .
+            dockerfile: ~/logstash/Dockerfile
           volumes:
             - logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
             - logstash/pipeline:/usr/share/logstash/pipeline:ro
