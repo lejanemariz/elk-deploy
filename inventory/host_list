@@ -1,7 +1,7 @@
 [elk_stack]
-elasticsearch ansible_host=54.214.106.156 
-logstash ansible_host=18.237.19.139 
-kibana ansible_host=54.190.5.225 
+elasticsearch ansible_host=34.219.125.29
+logstash ansible_host=18.236.244.59
+kibana ansible_host=54.212.213.181 
 
 [elk_stack:vars]
 ansible_user=ubuntu
